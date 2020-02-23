@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const ArticleSchema = new mongoose.Schema({
     title: String,
     subtitle: String,
-    body: Number,
-    author: Number,
+    body: String,
+    author: String,
 });
 
 //Creating our model
