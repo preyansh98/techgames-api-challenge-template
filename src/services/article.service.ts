@@ -36,7 +36,10 @@ export class ArtiService {
         }
       }
       else {
-        res.status(200).json(Article);
+        if(Article == null)
+          res.status(404).send("No such article!");
+        else
+         res.status(200).json(Article);
       }
     });
   }
@@ -58,8 +61,12 @@ export class ArtiService {
           res.status(400).send("Invalid ID");
         else
           res.status(404).send(error);
-      } else
-        res.status(200).json(deleted);
+      } else{
+        if(deleted == null)
+          res.status(404).send("No such article!");
+        else 
+          res.status(200).json(deleted);
+      }
     });
   }
 
@@ -80,7 +87,10 @@ export class ArtiService {
             if (error)
               res.status(404).send("No such article!");
             else
-              res.status(200).json(Article);
+              if(Article == null)
+                res.status(404).send("No such article!");
+              else
+                res.status(200).json(Article);
           });
         }
       }
