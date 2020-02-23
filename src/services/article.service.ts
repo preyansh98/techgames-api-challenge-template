@@ -40,13 +40,17 @@ export class ArtiService {
   }
 
   public deleteArticle(req: Request, res: Response) {
+    if(!req.params.articleId){
+        res.status(400);
+        return
+    }
+    
     const ArticleID = req.params.articleId;
     Article.findByIdAndDelete(ArticleID, (error: Error, deleted: any) => {
       if (error) {
         res.status(404).send(error);
       }
-      const message = deleted ? 'Deleted successfully' : 'Article not found :(';
-      res.status(200).send(message);
+      res.status(200).json(deleted);
     });
   }
 
