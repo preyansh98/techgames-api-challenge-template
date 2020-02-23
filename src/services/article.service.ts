@@ -44,7 +44,7 @@ export class ArtiService {
         res.status(400);
         return
     }
-    
+
     const ArticleID = req.params.articleId;
     Article.findByIdAndDelete(ArticleID, (error: Error, deleted: any) => {
       if (error) {
@@ -55,18 +55,20 @@ export class ArtiService {
   }
 
   public updateArticle(req: Request, res: Response) {
+    if(!req.params.articleId){
+        res.status(400); 
+        return
+    }
     const ArticleId = req.params.articleId;
     Article.findByIdAndUpdate(
       ArticleId,
       req.body,
       (error: Error, Article: any) => {
         if (error) {
-          res.send(error);
+          res.status(404).send(error);
+          return
         }
-        const message = Article
-          ? 'Updated successfully'
-          : 'Article not found :(';
-        res.send(message);
+        res.status(200).json(Article);
       }
     );
   }
