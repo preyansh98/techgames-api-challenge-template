@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-
 import { Article } from '../model/article.model';
-import mongoose from "mongoose";
 
 export class ArtiService {
   public welcomeMessage(req: Request, res: Response) {
@@ -29,12 +27,10 @@ export class ArtiService {
     const ArticleID = req.params.articleId;
     Article.findById(ArticleID, (error: Error, Article: any) => {
       if (error) {
-        if (req.params.articleId.length < 24) {
+        if (req.params.articleId.length < 24) 
           res.status(400).send("Article id wrong format")
-        }
-        else {
+        else 
           res.status(404).send("No such article!");
-        }
       }
       else {
         if(Article == null)
