@@ -10,8 +10,8 @@ export class Controller {
   }
 
   public routes() {
+    this.app.route("/status").get(this.artiService.welcomeMessage);
     this.app.route("/").get(this.artiService.welcomeMessage);
-  
     this.app.route("/articles").get(this.artiService.getAllArticle);
     this.app.route("/articles").post(this.artiService.addNewArticle);
 
