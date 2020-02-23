@@ -29,7 +29,7 @@ export class ArtiService {
     const ArticleID = req.params.articleId;
     Article.findById(ArticleID, (error: Error, Article: any) => {
       if (error) {
-        if (req.params.articleId.length < 12) {
+        if (req.params.articleId.length < 24) {
           res.status(400).send("Article id wrong format")
         }
         else {
@@ -58,7 +58,7 @@ export class ArtiService {
     const ArticleID = req.params.articleId;
     Article.findByIdAndDelete(ArticleID, (error: Error, deleted: any) => {
       if (error) {
-        if (!req.params.articleId || req.params.articleId.length < 12)
+        if (!req.params.articleId || req.params.articleId.length < 24)
           res.status(400).send("Invalid ID");
         else
           res.status(404).send(error);
@@ -78,7 +78,7 @@ export class ArtiService {
       req.body,
       (error: Error, Article: any) => {
         if (error) {
-          if (!req.params.articleId || req.params.articleId.length < 12)
+          if (!req.params.articleId || req.params.articleId.length < 24)
             res.status(400).send("Invalid ID");
           else
             res.status(404).send(error);
