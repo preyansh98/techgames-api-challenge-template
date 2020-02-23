@@ -20,6 +20,8 @@ class App {
             ? dbUrl = process.env.DB_URL
             : dbUrl = "mongodb://mongo:27017/techgames-template";
 
+        console.log(dbUrl)
+
         this.app = express();
         this.setConfig();
         this.setMongoConfig(dbUrl);
