@@ -19,9 +19,9 @@ if (port == "") {
 }
 
 app.use((req: Request, res: Response) => {
-    res.status(404).send({
-        status: 404,
-        message: "Invalid route"
+    res.status(500).send({
+        status: 500,
+        message: "Not Implemented"
     });
 });
 
