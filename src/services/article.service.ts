@@ -29,10 +29,10 @@ export class ArtiService {
     Article.findById(ArticleID, (error: Error, Article: any) => {
       if (error) {
         if (req.params.articleId.length < 12) {
-          res.status(404).send("No such article!");
+          res.status(400).send("Article id wrong format")
         }
         else {
-          res.status(400).send("Article id wrong format")
+          res.status(404).send("No such article!");
         }
       }
       else {
