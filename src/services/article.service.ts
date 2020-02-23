@@ -21,10 +21,14 @@ export class ArtiService {
   }
 
   public getArticle(req: Request, res: Response) {
+      if(!req.params.articleId){
+          res.status(400);
+          return
+      }
       const ArticleID = req.params.articleId; 
       Article.findById(ArticleID, (error: Error, Article: any) => {
         if(error)
-            res.status(500).send(error); 
+            res.status(404).send(error); 
         else
             res.json(Article); 
       });
