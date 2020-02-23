@@ -31,7 +31,7 @@ export class ArtiService {
         if(error)
             res.status(404).send("No such article!"); 
         else
-            res.json(Article); 
+            res.status(200).json(Article); 
       });
   }
 
@@ -73,7 +73,12 @@ export class ArtiService {
           res.status(404).send(error);
           return
         }
-        res.status(200).json(Article);
+        Article.findById(ArticleId, (error: Error, Article: any) => {
+            if(error)
+                res.status(404).send("No such article!"); 
+            else
+                res.status(200).json(Article); 
+          });
       }
     );
   }
