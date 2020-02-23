@@ -19,6 +19,5 @@ export class Controller {
       .route("/articles/:articleId")
       .get(this.artiService.getArticle)
       .delete(this.artiService.deleteArticle);
-
   }
 }

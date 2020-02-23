@@ -40,10 +40,10 @@ export class ArtiService {
   }
 
   public deleteArticle(req: Request, res: Response) {
-    const ArticleID = req.params.id;
+    const ArticleID = req.params.articleId;
     Article.findByIdAndDelete(ArticleID, (error: Error, deleted: any) => {
       if (error) {
-        res.send(error);
+        res.status(404).send(error);
       }
       const message = deleted ? 'Deleted successfully' : 'Article not found :(';
       res.status(200).send(message);
