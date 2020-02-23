@@ -3,26 +3,56 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import { Application, Request, Response } from "express";
+import { ArtiService } from "./services/article.service";
+import { Controller } from "./main.controller";
 
-dotenv.config();
 
-const app: Application = express();
-const port = process.env.SERVER_PORT || 3000;
 
-app.use(bodyParser.json());
-app.use(cors());
+import express, { Application } from 'express';
 
-if (port == "") {
-    // tslint:disable-next-line:no-console
-    console.log("Missing environment variables for configuration (check .env.example and create a .env)")
-    process.exit(1);
+import { Controller } from './main.controller';
+import { MONGO_URL } from './constants/pokeApi.constants';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+
+class App {
+    public app: Application;
+    public artiController: Controller;
+    public port: Number;
+
+    constructor() {
+        dotenv.config();
+
+        let dbUrl = "";
+
+        (process.env.DB_URL)
+            ? dbUrl = process.env.DB_URL
+            : dbUrl = "mongodb://mongo:27017/techgames-template";
+
+        this.port = process.env.SERVER_PORT || 3000;
+
+        this.app = express();
+        this.setConfig();
+        this.setMongoConfig(dbUrl);
+
+        this.artiController = new Controller(this.app);
+    }
+
+    private setConfig() {
+        this.app.use(bodyParser.json({ limit: '50mb' }));
+        this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+        this.app.use(cors());
+    }
+
+    private setMongoConfig(dbUrl: String) {
+        mongoose.connect(dbUrl, {
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
+        });
+        mongoose.set("useCreateIndex", true);
+    }
 }
 
-app.use((req: Request, res: Response) => {
-    res.status(500).send({
-        status: 500,
-        message: "Not Implemented"
-    });
-});
-
-export { app, port }
+export default new App().app;

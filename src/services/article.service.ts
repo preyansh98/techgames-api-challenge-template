@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { Article } from '../model/article.model';
 
-export class PokeService {
+export class ArtiService {
   public welcomeMessage(req: Request, res: Response) {
     let welcomeMessage = {
         "status" : "Up"
