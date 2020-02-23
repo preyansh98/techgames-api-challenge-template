@@ -3,18 +3,9 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import { Application, Request, Response } from "express";
-import { ArtiService } from "./services/article.service";
 import { Controller } from "./main.controller";
+import mongoose from "mongoose";
 
-
-
-import express, { Application } from 'express';
-
-import { Controller } from './main.controller';
-import { MONGO_URL } from './constants/pokeApi.constants';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import mongoose from 'mongoose';
 
 class App {
     public app: Application;
@@ -30,7 +21,6 @@ class App {
             ? dbUrl = process.env.DB_URL
             : dbUrl = "mongodb://mongo:27017/techgames-template";
 
-        this.port = process.env.SERVER_PORT || 3000;
 
         this.app = express();
         this.setConfig();
@@ -45,7 +35,7 @@ class App {
         this.app.use(cors());
     }
 
-    private setMongoConfig(dbUrl: String) {
+    private setMongoConfig(dbUrl: string) {
         mongoose.connect(dbUrl, {
             useNewUrlParser: true,
             useFindAndModify: false,
@@ -54,5 +44,6 @@ class App {
         mongoose.set("useCreateIndex", true);
     }
 }
+
 
 export default new App().app;

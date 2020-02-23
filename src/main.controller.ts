@@ -11,5 +11,6 @@ export class Controller {
 
   public routes() {
     this.app.route("/").get(this.artiService.welcomeMessage);
+  }
 
 }
