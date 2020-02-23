@@ -11,6 +11,14 @@ export class Controller {
 
   public routes() {
     this.app.route("/").get(this.artiService.welcomeMessage);
-  }
+  
+    this.app.route("/articles").get(this.artiService.getAllArticle);
+    this.app.route("/articles").post(this.artiService.addNewArticle);
 
+    this.app
+      .route("/articles/:articleId")
+      .get(this.artiService.getArticle)
+      .delete(this.artiService.deleteArticle);
+
+  }
 }

@@ -20,6 +20,16 @@ export class ArtiService {
     });
   }
 
+  public getArticle(req: Request, res: Response) {
+      const ArticleID = req.params.articleId; 
+      Article.findById(ArticleID, (error: Error, Article: any) => {
+        if(error)
+            res.status(500).send(error); 
+        else
+            res.json(Article); 
+      });
+  }
+
   public getAllArticle(req: Request, res: Response) {
     Article.find({}, (error: Error, Article: any) => {
       if (error) {

@@ -14,13 +14,11 @@ class App {
 
     constructor() {
         dotenv.config();
-
         let dbUrl = "";
 
         (process.env.DB_URL)
             ? dbUrl = process.env.DB_URL
             : dbUrl = "mongodb://mongo:27017/techgames-template";
-
 
         this.app = express();
         this.setConfig();
@@ -44,6 +42,5 @@ class App {
         mongoose.set("useCreateIndex", true);
     }
 }
-
 
 export default new App().app;
