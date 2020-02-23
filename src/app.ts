@@ -23,16 +23,18 @@ class App {
         console.log(dbUrl)
 
         this.app = express();
+        this.setConfig();
+        this.setMongoConfig(dbUrl);
+
+        this.artiController = new Controller(this.app);
+
+
         this.app.use((req: Request, res: Response) => {
             res.status(500).send({
                 status: 500,
                 message: "Not Implemented"
             });
         });
-        this.setConfig();
-        this.setMongoConfig(dbUrl);
-
-        this.artiController = new Controller(this.app);
     }
 
     private setConfig() {
