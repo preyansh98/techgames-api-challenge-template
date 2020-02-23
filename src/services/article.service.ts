@@ -22,7 +22,7 @@ export class ArtiService {
   }
 
   public getArticle(req: Request, res: Response) {
-      if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
+      if(!req.params.articleId || !mongoose.Types.ObjectId.isValid(req.params.articleId)){
           res.status(400);
           return
       }
@@ -45,7 +45,7 @@ export class ArtiService {
   }
 
   public deleteArticle(req: Request, res: Response) {
-    if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
+    if(!req.params.articleId || !mongoose.Types.ObjectId.isValid(req.params.articleId)){
         res.status(400);
         return
     }
@@ -60,7 +60,7 @@ export class ArtiService {
   }
 
   public updateArticle(req: Request, res: Response) {
-    if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
+    if(!req.params.articleId || !mongoose.Types.ObjectId.isValid(req.params.articleId)){
         res.status(400); 
         return
     }
@@ -81,9 +81,5 @@ export class ArtiService {
           });
       }
     );
-  }
-
-  public checkIfValidId(obj_id : string){
-      return mongoose.Types.ObjectId.isValid(obj_id);
   }
 }
