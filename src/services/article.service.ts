@@ -51,7 +51,7 @@ export class ArtiService {
   }
 
   public updateArticle(req: Request, res: Response) {
-    const ArticleId = req.params.id;
+    const ArticleId = req.params.articleId;
     Article.findByIdAndUpdate(
       ArticleId,
       req.body,
