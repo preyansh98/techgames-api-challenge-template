@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { Article } from '../model/article.model';
+import mongoose from "mongoose";
 
 export class ArtiService {
   public welcomeMessage(req: Request, res: Response) {
@@ -21,14 +22,14 @@ export class ArtiService {
   }
 
   public getArticle(req: Request, res: Response) {
-      if(!req.params.articleId){
+      if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
           res.status(400);
           return
       }
       const ArticleID = req.params.articleId; 
       Article.findById(ArticleID, (error: Error, Article: any) => {
         if(error)
-            res.status(404).send(error); 
+            res.status(404).send("No such article!"); 
         else
             res.json(Article); 
       });
@@ -44,7 +45,7 @@ export class ArtiService {
   }
 
   public deleteArticle(req: Request, res: Response) {
-    if(!req.params.articleId){
+    if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
         res.status(400);
         return
     }
@@ -59,7 +60,7 @@ export class ArtiService {
   }
 
   public updateArticle(req: Request, res: Response) {
-    if(!req.params.articleId){
+    if(!req.params.articleId || !this.checkIfValidId(req.params.articleId)){
         res.status(400); 
         return
     }
@@ -75,5 +76,9 @@ export class ArtiService {
         res.status(200).json(Article);
       }
     );
+  }
+
+  private checkIfValidId(obj_id : string){
+      return mongoose.Types.ObjectId.isValid(obj_id);
   }
 }
