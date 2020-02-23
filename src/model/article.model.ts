@@ -5,7 +5,7 @@ const ArticleSchema = new mongoose.Schema({
     subtitle: String,
     body: String,
     author: String,
-});
+}, {versionKey: false});
 
 //Creating our model
 export const Article = mongoose.model("Article", ArticleSchema);
