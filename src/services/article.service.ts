@@ -26,19 +26,16 @@ export class ArtiService {
   }
 
   public getArticle(req: Request, res: Response) {
-    console.log("article method called");
-      if(!req.params.articleId || req.params.articleId.length < 12){
-          res.status(400);
-          console.log("invalid id");
-          return
-          console.log("return didnt work");
-      } 
-
-      console.log("article is fine");
       const ArticleID = req.params.articleId; 
       Article.findById(ArticleID, (error: Error, Article: any) => {
-          if(error)
+          if(error){
+            if(req.params.articleId.length < 12){
               res.status(404).send("No such article!"); 
+            }
+            else {
+              res.status(400).send("Article id wrong format")
+            }
+          }
           else{
               res.status(200).json(Article); 
               console.log("returning");
