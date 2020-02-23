@@ -13,15 +13,16 @@ export class ArtiService {
 
   public addNewArticle(req: Request, res: Response) {
     const newArticle = new Article(req.body);
-    newArticle.save((error: Error, Article: any) => {
-      if (error) {
-        if (!req.body.title || !req.body.subtitle || !req.body.body || !req.body.author) {
-          res.status(400).send("Invalid Article!");
+    if (!req.body.title || !req.body.subtitle || !req.body.body || !req.body.author) {
+      res.status(400).send("Invalid Article!");
+    } else {
+      newArticle.save((error: Error, Article: any) => {
+        if (error) {
+            res.status(500).send(error);
         } else
-          res.send(error);
-      } else
-        res.json(Article);
-    });
+          res.status(200).json(Article);
+      });
+    }
   }
 
   public getArticle(req: Request, res: Response) {
