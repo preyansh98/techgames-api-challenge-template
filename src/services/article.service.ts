@@ -83,7 +83,7 @@ export class ArtiService {
     );
   }
 
-  private checkIfValidId(obj_id : string){
+  public checkIfValidId(obj_id : string){
       return mongoose.Types.ObjectId.isValid(obj_id);
   }
 }
