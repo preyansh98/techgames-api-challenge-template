@@ -83,17 +83,17 @@ export class ArtiService {
           else
             res.status(404).send(error);
         }
-        else {
-          Article.findById(ArticleId, (error: Error, Article: any) => {
-            if (error)
+      }
+    ).then(article => {
+        Article.findById(ArticleId, (error: Error, Article: any) => {
+          if (error)
+            res.status(404).send("No such article!");
+          else
+            if(Article == null)
               res.status(404).send("No such article!");
             else
-              if(Article == null)
-                res.status(404).send("No such article!");
-              else
-                res.status(200).json(Article);
-          });
-        }
+              res.status(200).json(Article);
+        });
       }
     );
   }
