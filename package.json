@@ -1,0 +1,47 @@
+{
+  "name": "techgames-api-challenge-template",
+  "version": "0.0.0",
+  "description": "Template for the techgames backend challenge",
+  "main": "dist/server.js",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Compete-McGill/techgames-api-challenge-template.git"
+  },
+  "author": "Mohamed Beydoun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Compete-McGill/techgames-api-challenge-template/issues"
+  },
+  "homepage": "https://github.com/Compete-McGill/techgames-api-challenge-template#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "mongoose": "^5.8.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/mongodb": "^3.3.14",
+    "@types/mongoose": "^5.5.39",
+    "@types/node": "^13.1.4",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  }
+}
